@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    
+    <changeSet id="1.0" author="hehmdalolkek">
+        <preConditions>
+            <not>
+                <tableExists tableName="country"/>
+            </not>
+        </preConditions>
+        <createTable tableName="country">
+            <column name="id" type="bigserial" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="code" type="varchar(5)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1.1" author="hehmdalolkek">
+        <preConditions>
+            <not>
+                <tableExists tableName="city"/>
+            </not>
+        </preConditions>
+        <createTable tableName="city">
+            <column name="id" type="bigserial" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="country_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint
+                baseTableName="city"
+                baseColumnNames="country_id"
+                constraintName="city_country__country_id__fk"
+                referencedTableName="country"
+                referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="1.2" author="hehmdalolkek">
+        <preConditions>
+            <not>
+                <tableExists tableName="temperature"/>
+            </not>
+        </preConditions>
+        <createTable tableName="temperature">
+            <column name="id" type="bigserial" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="temperature" type="float">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_time" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="city_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint
+                baseTableName="temperature"
+                baseColumnNames="city_id"
+                constraintName="temperature_city__city_id__fk"
+                referencedTableName="city"
+                referencedColumnNames="id"/>
+    </changeSet>
+
+</databaseChangeLog>
