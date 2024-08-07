@@ -9,6 +9,9 @@ spring:
   liquibase:
     change-log: classpath:db/changelog/changelog-root.xml
   jpa:
-    show-sql: true
-    hibernate:
-      ddl-auto: validate
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        hbm2ddl:
+          auto: validate
