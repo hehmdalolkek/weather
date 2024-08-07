@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @Builder
 public class TemperatureResponse {
 
-    private float temperature;
+    private double temperature;
 
     private LocalDateTime datetime;
 

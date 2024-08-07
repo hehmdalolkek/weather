@@ -55,7 +55,7 @@
             <column name="id" type="bigserial" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="temperature" type="float">
+            <column name="temperature" type="double">
                 <constraints nullable="false"/>
             </column>
             <column name="date_time" type="timestamp">

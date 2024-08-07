@@ -23,7 +23,7 @@ public class Temperature implements Serializable {
     private Long id;
 
     @Column(name = "temperature", nullable = false)
-    private Float temperature;
+    private Double temperature;
 
     @CreationTimestamp
     @Column(name = "date_time", nullable = false)

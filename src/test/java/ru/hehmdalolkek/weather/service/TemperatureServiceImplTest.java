@@ -53,7 +53,7 @@ class TemperatureServiceImplTest {
         // given
         String countryCode = "RU";
         String city = "Moscow";
-        float temp = 22.5F;
+        double temp = 22.5F;
         LocalDateTime dateTime = LocalDateTime.of(2024, Month.AUGUST, 6, 12, 0);
         Temperature temperature = new Temperature();
         CurrentTemperatureResponse current = CurrentTemperatureResponse.builder()
@@ -161,7 +161,7 @@ class TemperatureServiceImplTest {
         // given
         String countryCode = "RU";
         String city = "Moscow";
-        float temp = 24.4F;
+        double temp = 24.4F;
         LocalDate date = LocalDate.of(2024, Month.AUGUST, 6);
         LocalDateTime dateTime = LocalDateTime.of(2024, Month.AUGUST, 6, 12, 0);
         Temperature temperature = new Temperature();
