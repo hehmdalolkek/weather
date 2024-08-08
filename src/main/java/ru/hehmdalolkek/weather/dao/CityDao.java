@@ -9,4 +9,6 @@ public interface CityDao extends JpaRepository<City, Long> {
 
     boolean existsByNameAndCountryCode(String city, String countryCode);
 
+    City findByNameAndCountryCode(String city, String countryCode);
+
 }

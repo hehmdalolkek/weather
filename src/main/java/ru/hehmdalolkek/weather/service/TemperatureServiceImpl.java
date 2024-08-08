@@ -47,6 +47,11 @@ public class TemperatureServiceImpl implements TemperatureService {
         return this.temperatureMapper.toCurrentTemperatureResponse(temperature);
     }
 
+    @Override
+    public void saveAllTemperatures(List<Temperature> temperatureList) {
+        this.temperatureDao.saveAll(temperatureList);
+    }
+
     private void checkExistsCityCountry(String city, String countryCode) throws LocationException {
         boolean countryExists = this.countryService.countryExistsByCountryCode(countryCode);
         if (!countryExists) {

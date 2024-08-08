@@ -4,8 +4,10 @@ import ru.hehmdalolkek.weather.dto.CurrentTemperatureResponse;
 import ru.hehmdalolkek.weather.dto.DailyTemperatureResponse;
 import ru.hehmdalolkek.weather.exception.LocationException;
 import ru.hehmdalolkek.weather.exception.TemperatureException;
+import ru.hehmdalolkek.weather.model.Temperature;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public interface TemperatureService {
 
@@ -19,5 +21,7 @@ public interface TemperatureService {
             String countryCode,
             String city
     ) throws LocationException, TemperatureException;
+
+    void saveAllTemperatures(List<Temperature> temperatureList);
 
 }

@@ -9,4 +9,6 @@ public interface CountryDao extends JpaRepository<Country, Long> {
 
     boolean existsByCodeIgnoreCase(String name);
 
+    Country findByCode(String countryCode);
+
 }
