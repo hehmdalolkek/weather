@@ -15,8 +15,8 @@ public interface TemperatureDao extends JpaRepository<Temperature, Long> {
 
     @Query("""
                 FROM Temperature t
-                JOIN FETCH t.city ct
-                JOIN FETCH ct.country cntr
+                LEFT JOIN FETCH t.city ct
+                LEFT JOIN FETCH ct.country cntr
                 WHERE DATE(t.dateTime) = :date
                 AND ct.name = :city
                 AND cntr.code = :countryCode
@@ -27,11 +27,18 @@ public interface TemperatureDao extends JpaRepository<Temperature, Long> {
 
     @Query("""
                 FROM Temperature t
-                JOIN FETCH t.city ct
-                JOIN FETCH ct.country cntr
-                WHERE t.dateTime = (SELECT MAX(t.dateTime) FROM Temperature t)
-                AND ct.name = :city
+                LEFT JOIN FETCH t.city ct
+                LEFT JOIN FETCH ct.country cntr
+                WHERE ct.name = :city
                 AND cntr.code = :countryCode
+                AND t.dateTime = (
+                        SELECT MAX(t2.dateTime)
+                        FROM Temperature t2
+                        LEFT JOIN t2.city ct2
+                        LEFT JOIN ct2.country cntr2
+                        WHERE ct2.name = :city
+                        AND cntr2.code = :countryCode
+                    )
             """)
     Optional<Temperature> findLastByCityNameAndCityCountryCode(@Param("city") String city,
                                                                @Param("countryCode") String countryCode);
