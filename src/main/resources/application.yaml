@@ -1,6 +1,8 @@
 spring:
   application:
     name: weather
+  config:
+    import: optional:file:.env[.properties]
   datasource:
     driver-class-name: org.postgresql.Driver
     url: ${DB_URL:jdbc:postgresql://localhost:5432/weather}
@@ -9,9 +11,20 @@ spring:
   liquibase:
     change-log: classpath:db/changelog/changelog-root.xml
   jpa:
-    properties:
-      hibernate:
-        show_sql: true
-        format_sql: true
-        hbm2ddl:
-          auto: validate
+    hibernate:
+      ddl-auto: validate
+weather:
+  request:
+    rate:
+      time: ${WEATHER_REQUEST_RATE_TIME:10}
+    locations: ${WEATHER_REQUEST_LOCATIONS:RU/Moscow, RU/Kazan, RU/Samara, GB/London, GB/Birmingham, DE/Hamburg, DE/Berlin}
+    api:
+      weatherbit:
+        api-key: ${WEATHERBIT_API_KEY}
+        base-url: ${WEATHERBIT_BASE_URL:https://api.weatherbit.io/v2.0}
+      openweathermap:
+        api-key: ${OPENWEATHERMAP_API_KEY}
+        base-url: ${OPENWEATHERMAP_BASE_URL:https://api.openweathermap.org/data/2.5}
+      weatherapi:
+        api-key: ${WEATHERAPI_API_KEY}
+        base-url: ${WEATHERAPI_BASE_URL:https://api.weatherapi.com/v1}
