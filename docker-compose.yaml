@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  db:
+    container_name: db_postgres_weather
+    image: postgres:15-alpine
+    ports:
+      - 5432:5432
+    restart: always
+    env_file: .env
+    volumes:
+      - db:/var/lib/postgresql/data
+  app:
+    container_name: app_weather
+    build: .
+    ports:
+      - 8080:8080
+    restart: always
+    depends_on:
+      - db
+    env_file: .env
+volumes:
+  db:
