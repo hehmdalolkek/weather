@@ -16,7 +16,6 @@ Settings: specifies the list of cities; specifies the frequency of polling servi
 * Mockito
 * PostgreSQL
 * LiquiBase
-* Testcontainers
 
 ## Run with docker
 1. First, you need to create and fill out .env file in the project root according to the example:
